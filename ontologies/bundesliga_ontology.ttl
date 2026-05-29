@@ -1,0 +1,315 @@
+@prefix : <http://example.org/bundesliga/ontology#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://example.org/bundesliga/ontology>
+    a owl:Ontology ;
+    rdfs:label "Bundesliga Ontology"@en ;
+    rdfs:comment "Ontology for Bundesliga clubs, players, seasons, squad memberships, sporting performance, and financial records."@en .
+
+#################################################################
+# Classes
+#################################################################
+
+:Club
+    a owl:Class ;
+    rdfs:label "Club"@en ;
+    rdfs:comment "A football club participating in the Bundesliga data set."@en .
+
+:Player
+    a owl:Class ;
+    rdfs:label "Player"@en ;
+    rdfs:comment "A football player in the Bundesliga data set."@en .
+
+:Country
+    a owl:Class ;
+    rdfs:label "Country"@en ;
+    rdfs:comment "A country used for club location or player nationality."@en .
+
+:Position
+    a owl:Class ;
+    rdfs:label "Position"@en ;
+    rdfs:comment "A playing position or position group."@en .
+
+:Season
+    a owl:Class ;
+    rdfs:label "Season"@en ;
+    rdfs:comment "A football season, for example 2025-26."@en .
+
+:League
+    a owl:Class ;
+    rdfs:label "League"@en ;
+    rdfs:comment "A football league or competition."@en .
+
+:SquadMembership
+    a owl:Class ;
+    rdfs:label "Squad Membership"@en ;
+    rdfs:comment "A player's membership in a club squad for a specific season and position."@en .
+
+:ClubPerformance
+    a owl:Class ;
+    rdfs:label "Club Performance"@en ;
+    rdfs:comment "A club's sporting performance in a league season."@en .
+
+:FinancialRecord
+    a owl:Class ;
+    rdfs:label "Financial Record"@en ;
+    rdfs:comment "A club's financial and transfer-market record for a season."@en .
+
+#################################################################
+# Object properties
+#################################################################
+
+:hasSquadMembership
+    a owl:ObjectProperty ;
+    rdfs:label "has squad membership"@en ;
+    rdfs:domain :Player ;
+    rdfs:range :SquadMembership ;
+    owl:inverseOf :membershipOfPlayer .
+
+:membershipOfPlayer
+    a owl:ObjectProperty ;
+    rdfs:label "membership of player"@en ;
+    rdfs:domain :SquadMembership ;
+    rdfs:range :Player ;
+    owl:inverseOf :hasSquadMembership .
+
+:membershipForClub
+    a owl:ObjectProperty ;
+    rdfs:label "membership for club"@en ;
+    rdfs:domain :SquadMembership ;
+    rdfs:range :Club .
+
+:membershipInSeason
+    a owl:ObjectProperty ;
+    rdfs:label "membership in season"@en ;
+    rdfs:domain :SquadMembership ;
+    rdfs:range :Season .
+
+:hasNationality
+    a owl:ObjectProperty ;
+    rdfs:label "has nationality"@en ;
+    rdfs:domain :Player ;
+    rdfs:range :Country .
+
+:hasPosition
+    a owl:ObjectProperty ;
+    rdfs:label "has position"@en ;
+    rdfs:domain [
+        a owl:Class ;
+        owl:unionOf ( :Player :SquadMembership )
+    ] ;
+    rdfs:range :Position .
+
+:basedInCountry
+    a owl:ObjectProperty ;
+    rdfs:label "based in country"@en ;
+    rdfs:domain :Club ;
+    rdfs:range :Country .
+
+:hasPerformance
+    a owl:ObjectProperty ;
+    rdfs:label "has performance"@en ;
+    rdfs:domain :Club ;
+    rdfs:range :ClubPerformance .
+
+:hasFinancialRecord
+    a owl:ObjectProperty ;
+    rdfs:label "has financial record"@en ;
+    rdfs:domain :Club ;
+    rdfs:range :FinancialRecord .
+
+:performanceInSeason
+    a owl:ObjectProperty ;
+    rdfs:label "performance in season"@en ;
+    rdfs:domain :ClubPerformance ;
+    rdfs:range :Season .
+
+:financialRecordInSeason
+    a owl:ObjectProperty ;
+    rdfs:label "financial record in season"@en ;
+    rdfs:domain :FinancialRecord ;
+    rdfs:range :Season .
+
+:playsInLeague
+    a owl:ObjectProperty ;
+    rdfs:label "plays in league"@en ;
+    rdfs:domain [
+        a owl:Class ;
+        owl:unionOf ( :Club :ClubPerformance )
+    ] ;
+    rdfs:range :League .
+
+#################################################################
+# Datatype properties
+#################################################################
+
+:clubName
+    a owl:DatatypeProperty ;
+    rdfs:label "club name"@en ;
+    rdfs:domain :Club ;
+    rdfs:range xsd:string .
+
+:shortName
+    a owl:DatatypeProperty ;
+    rdfs:label "short name"@en ;
+    rdfs:domain :Club ;
+    rdfs:range xsd:string .
+
+:city
+    a owl:DatatypeProperty ;
+    rdfs:label "city"@en ;
+    rdfs:domain :Club ;
+    rdfs:range xsd:string .
+
+:stadium
+    a owl:DatatypeProperty ;
+    rdfs:label "stadium"@en ;
+    rdfs:domain :Club ;
+    rdfs:range xsd:string .
+
+:playerName
+    a owl:DatatypeProperty ;
+    rdfs:label "player name"@en ;
+    rdfs:domain :Player ;
+    rdfs:range xsd:string .
+
+:birthDate
+    a owl:DatatypeProperty ;
+    rdfs:label "birth date"@en ;
+    rdfs:domain :Player ;
+    rdfs:range xsd:date .
+
+:age
+    a owl:DatatypeProperty ;
+    rdfs:label "age"@en ;
+    rdfs:domain :Player ;
+    rdfs:range xsd:integer .
+
+:countryName
+    a owl:DatatypeProperty ;
+    rdfs:label "country name"@en ;
+    rdfs:domain :Country ;
+    rdfs:range xsd:string .
+
+:continent
+    a owl:DatatypeProperty ;
+    rdfs:label "continent"@en ;
+    rdfs:domain :Country ;
+    rdfs:range xsd:string .
+
+:positionName
+    a owl:DatatypeProperty ;
+    rdfs:label "position name"@en ;
+    rdfs:domain :Position ;
+    rdfs:range xsd:string .
+
+:positionGroup
+    a owl:DatatypeProperty ;
+    rdfs:label "position group"@en ;
+    rdfs:domain :Position ;
+    rdfs:range xsd:string .
+
+:seasonLabel
+    a owl:DatatypeProperty ;
+    rdfs:label "season label"@en ;
+    rdfs:domain :Season ;
+    rdfs:range xsd:string .
+
+:leagueName
+    a owl:DatatypeProperty ;
+    rdfs:label "league name"@en ;
+    rdfs:domain :League ;
+    rdfs:range xsd:string .
+
+:leaguePosition
+    a owl:DatatypeProperty ;
+    rdfs:label "league position"@en ;
+    rdfs:domain :ClubPerformance ;
+    rdfs:range xsd:integer .
+
+:points
+    a owl:DatatypeProperty ;
+    rdfs:label "points"@en ;
+    rdfs:domain :ClubPerformance ;
+    rdfs:range xsd:integer .
+
+:matchesPlayed
+    a owl:DatatypeProperty ;
+    rdfs:label "matches played"@en ;
+    rdfs:domain :ClubPerformance ;
+    rdfs:range xsd:integer .
+
+:wins
+    a owl:DatatypeProperty ;
+    rdfs:label "wins"@en ;
+    rdfs:domain :ClubPerformance ;
+    rdfs:range xsd:integer .
+
+:draws
+    a owl:DatatypeProperty ;
+    rdfs:label "draws"@en ;
+    rdfs:domain :ClubPerformance ;
+    rdfs:range xsd:integer .
+
+:losses
+    a owl:DatatypeProperty ;
+    rdfs:label "losses"@en ;
+    rdfs:domain :ClubPerformance ;
+    rdfs:range xsd:integer .
+
+:goalsFor
+    a owl:DatatypeProperty ;
+    rdfs:label "goals for"@en ;
+    rdfs:domain :ClubPerformance ;
+    rdfs:range xsd:integer .
+
+:goalsAgainst
+    a owl:DatatypeProperty ;
+    rdfs:label "goals against"@en ;
+    rdfs:domain :ClubPerformance ;
+    rdfs:range xsd:integer .
+
+:goalDifference
+    a owl:DatatypeProperty ;
+    rdfs:label "goal difference"@en ;
+    rdfs:domain :ClubPerformance ;
+    rdfs:range xsd:integer .
+
+:performanceScore
+    a owl:DatatypeProperty ;
+    rdfs:label "performance score"@en ;
+    rdfs:domain :ClubPerformance ;
+    rdfs:range xsd:decimal .
+
+:squadMarketValueEUR
+    a owl:DatatypeProperty ;
+    rdfs:label "squad market value EUR"@en ;
+    rdfs:domain :FinancialRecord ;
+    rdfs:range xsd:decimal .
+
+:transferSpendingEUR
+    a owl:DatatypeProperty ;
+    rdfs:label "transfer spending EUR"@en ;
+    rdfs:domain :FinancialRecord ;
+    rdfs:range xsd:decimal .
+
+:transferIncomeEUR
+    a owl:DatatypeProperty ;
+    rdfs:label "transfer income EUR"@en ;
+    rdfs:domain :FinancialRecord ;
+    rdfs:range xsd:decimal .
+
+:netTransferSpendingEUR
+    a owl:DatatypeProperty ;
+    rdfs:label "net transfer spending EUR"@en ;
+    rdfs:domain :FinancialRecord ;
+    rdfs:range xsd:decimal .
+
+:marketValueEUR
+    a owl:DatatypeProperty ;
+    rdfs:label "market value EUR"@en ;
+    rdfs:domain :SquadMembership ;
+    rdfs:range xsd:decimal .

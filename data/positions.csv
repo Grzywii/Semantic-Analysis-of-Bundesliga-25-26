@@ -1,0 +1,16 @@
+position_id,position_name,position_group
+gk,Goalkeeper,Goalkeeper
+cb,Centre-Back,Defender
+rb,Right-Back,Defender
+lb,Left-Back,Defender
+rwb,Right Wing-Back,Defender
+lwb,Left Wing-Back,Defender
+dm,Defensive Midfield,Midfielder
+cm,Central Midfield,Midfielder
+am,Attacking Midfield,Midfielder
+rm,Right Midfield,Midfielder
+lm,Left Midfield,Midfielder
+cf,Centre-Forward,Forward
+ss,Second Striker,Forward
+lw,Left Winger,Forward
+rw,Right Winger,Forward

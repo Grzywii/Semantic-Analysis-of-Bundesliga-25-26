@@ -1,0 +1,61 @@
+country_id,country_name,continent
+algeria,Algeria,Africa
+argentina,Argentina,South America
+australia,Australia,Oceania
+austria,Austria,Europe
+belgium,Belgium,Europe
+benin,Benin,Africa
+bosnia_and_herzegovina,Bosnia and Herzegovina,Europe
+brazil,Brazil,South America
+burkina_faso,Burkina Faso,Africa
+cameroon,Cameroon,Africa
+canada,Canada,North America
+colombia,Colombia,South America
+comoros,Comoros,Africa
+croatia,Croatia,Europe
+czech_republic,Czech Republic,Europe
+dr_congo,DR Congo,Africa
+denmark,Denmark,Europe
+ecuador,Ecuador,South America
+egypt,Egypt,Africa
+england,England,Europe
+estonia,Estonia,Europe
+france,France,Europe
+gambia,Gambia,Africa
+georgia,Georgia,Europe/Asia
+germany,Germany,Europe
+ghana,Ghana,Africa
+greece,Greece,Europe
+guinea,Guinea,Africa
+hungary,Hungary,Europe
+iceland,Iceland,Europe
+indonesia,Indonesia,Asia
+italy,Italy,Europe
+ivory_coast,Ivory Coast,Africa
+japan,Japan,Asia
+kosovo,Kosovo,Europe
+libya,Libya,Africa
+luxembourg,Luxembourg,Europe
+morocco,Morocco,Africa
+netherlands,Netherlands,Europe
+nigeria,Nigeria,Africa
+norway,Norway,Europe
+peru,Peru,South America
+poland,Poland,Europe
+portugal,Portugal,Europe
+scotland,Scotland,Europe
+senegal,Senegal,Africa
+serbia,Serbia,Europe
+slovakia,Slovakia,Europe
+south_korea,South Korea,Asia
+spain,Spain,Europe
+suriname,Suriname,South America
+sweden,Sweden,Europe
+switzerland,Switzerland,Europe
+syria,Syria,Asia
+togo,Togo,Africa
+tunisia,Tunisia,Africa
+turkey,Turkey,Europe/Asia
+usa,USA,North America
+ukraine,Ukraine,Europe
+wales,Wales,Europe
