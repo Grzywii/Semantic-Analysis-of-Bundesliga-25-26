@@ -1,0 +1,18 @@
+PREFIX : <http://example.org/bundesliga/ontology#>
+
+SELECT ?clubName
+       ?squadMarketValueEUR
+       ?leaguePosition
+       ?performanceScore
+WHERE {
+  ?club a :Club ;
+        :clubName ?clubName ;
+        :hasFinancialRecord ?financialRecord ;
+        :hasPerformance ?performance .
+
+  ?financialRecord :squadMarketValueEUR ?squadMarketValueEUR .
+
+  ?performance :leaguePosition ?leaguePosition ;
+               :performanceScore ?performanceScore .
+}
+ORDER BY DESC(?squadMarketValueEUR)

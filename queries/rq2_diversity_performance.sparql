@@ -1,0 +1,36 @@
+PREFIX : <http://example.org/bundesliga/ontology#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?clubName
+       ?players
+       ?nationalities
+       ?foreignPlayers
+       ?foreignPlayerShare
+       ?leaguePosition
+       ?performanceScore
+WHERE {
+  {
+    SELECT ?club ?clubName
+           (COUNT(DISTINCT ?player) AS ?players)
+           (COUNT(DISTINCT ?nationality) AS ?nationalities)
+           (SUM(IF(?nationality != ?clubCountry, 1, 0)) AS ?foreignPlayers)
+           ((xsd:decimal(SUM(IF(?nationality != ?clubCountry, 1, 0))) / COUNT(DISTINCT ?player)) * 100 AS ?foreignPlayerShare)
+    WHERE {
+      ?player a :Player ;
+              :hasNationality ?nationality ;
+              :hasSquadMembership ?membership .
+
+      ?membership :membershipForClub ?club .
+
+      ?club :clubName ?clubName ;
+            :basedInCountry ?clubCountry .
+    }
+    GROUP BY ?club ?clubName
+  }
+
+  ?club :hasPerformance ?performance .
+
+  ?performance :leaguePosition ?leaguePosition ;
+               :performanceScore ?performanceScore .
+}
+ORDER BY DESC(?performanceScore)

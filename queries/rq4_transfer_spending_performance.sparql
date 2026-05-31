@@ -1,0 +1,23 @@
+PREFIX : <http://example.org/bundesliga/ontology#>
+
+SELECT ?clubName
+       ?transferSpendingEUR
+       ?netTransferSpendingEUR
+       ?leaguePosition
+       ?performanceScore
+WHERE {
+  ?club a :Club ;
+        :clubName ?clubName ;
+        :hasFinancialRecord ?financialRecord ;
+        :hasPerformance ?performance .
+
+  ?financialRecord :transferSpendingEUR ?transferSpendingEUR .
+
+  OPTIONAL {
+    ?financialRecord :netTransferSpendingEUR ?netTransferSpendingEUR .
+  }
+
+  ?performance :leaguePosition ?leaguePosition ;
+               :performanceScore ?performanceScore .
+}
+ORDER BY DESC(?transferSpendingEUR)
